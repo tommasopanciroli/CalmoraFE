@@ -1,0 +1,37 @@
+#hp {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    169deg,
+    rgba(255, 255, 255, 1) 17%,
+    rgba(194, 244, 253, 1) 36%,
+    rgba(0, 209, 246, 1) 100%
+  );
+  height: 100vh;
+  color: #44afcf;
+  font-family: Montserrat, sans-serif;
+}
+
+.myButton {
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #44afcf;
+  display: inline-block;
+  cursor: pointer;
+  color: #000000;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 7px 38px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 1rem;
+}
+
+.myButton:hover {
+  background-color: #44afcf;
+  color: #ffffff;
+}
+
+#title {
+  color: #44afcf;
+}
