@@ -11,7 +11,9 @@ const Homepage = ({ setIsAuthenticated }) => {
 
   return (
     <>
-      <MyNavbar />
+      <MyNavbar onLoginClick={() => setShowLogin(true)}
+        onRegisterClick={() => setShowRegister(true)}
+        />
       <Container fluid id="hp">
         <Row className="align-items-center">
           <Col md={6} className="mt-5 ms-5">
