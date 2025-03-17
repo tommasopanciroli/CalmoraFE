@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Homepage from './Components/Homepage'
-import Dashboard from './Components/Dashboard'
+import Dashboard from './Components/PsychologistDashboard'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import UserDashboard from './Components/UserDashboard'
+import PsychologistDashboard from './Components/PsychologistDashboard'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [userRole, setUserRole] = useState(null)
 
   return (
     <>
@@ -15,15 +18,25 @@ function App() {
             path="/"
             element={
               isAuthenticated ? (
-                <Navigate to="/dashboard" />
+                userRole === 'ROLE_USER' ? (
+                  <Navigate to="/dashboardUser" />
+                ) : (
+                  <Navigate to="/dashboardPsychologist" />
+                )
               ) : (
-                <Homepage setIsAuthenticated={setIsAuthenticated} />
+                <Homepage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole}/>
               )
             }
           />
           <Route
-            path="/dashboard"
-            element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+            path="/dashboardUser"
+            element={isAuthenticated ? <UserDashboard /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/dashboardPsychologist"
+            element={
+              isAuthenticated ? <PsychologistDashboard /> : <Navigate to="/" />
+            }
           />
         </Routes>
       </BrowserRouter>

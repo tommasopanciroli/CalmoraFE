@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-const LoginModal = ({ show, handleClose, setIsAuthenticated }) => {
+const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -22,11 +22,19 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated }) => {
       }
 
       const data = await response.json()
-      console.log('Token ricevuto', data.token)
+      console.log('Token ricevuto')
+      console.log(data.role);
+      
 
-      setIsAuthenticated(true);
+      setIsAuthenticated(true)
+      setUserRole(data.role)
+
       handleClose()
-      navigate('/dashboard');
+      if (data.role === 'ROLE_USER') {
+        navigate('/dashboardUser')
+      } else if (data.role === 'ROLE_PSYCHOLOGIST') {
+        navigate('/dashboardPsychologist')
+      }
     } catch (error) {
       console.error('Errore durante il login: ', error.message)
     }
@@ -68,4 +76,4 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated }) => {
   )
 }
 
-export default LoginModal;
+export default LoginModal

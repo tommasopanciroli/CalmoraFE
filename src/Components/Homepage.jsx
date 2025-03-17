@@ -5,15 +5,16 @@ import '../Styles/Homepage.css'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 
-const Homepage = ({ setIsAuthenticated }) => {
+const Homepage = ({ setIsAuthenticated, setUserRole }) => {
   const [showLogin, setShowLogin] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
 
   return (
     <>
-      <MyNavbar onLoginClick={() => setShowLogin(true)}
+      <MyNavbar
+        onLoginClick={() => setShowLogin(true)}
         onRegisterClick={() => setShowRegister(true)}
-        />
+      />
       <Container fluid id="hp">
         <Row className="align-items-center">
           <Col md={6} className="mt-5 ms-5">
@@ -36,11 +37,13 @@ const Homepage = ({ setIsAuthenticated }) => {
         show={showLogin}
         handleClose={() => setShowLogin(false)}
         setIsAuthenticated={setIsAuthenticated}
+        setUserRole={setUserRole}
       />
       <RegisterModal
         show={showRegister}
         handleClose={() => setShowRegister(false)}
         setIsAuthenticated={setIsAuthenticated}
+        setUserRole={setUserRole}
       />
     </>
   )
