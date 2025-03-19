@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap'
-import MyNavbar from './MyNavbar'
+import MyNavbar from '../Components/MyNavbar'
 import '../Styles/Homepage.css'
-import LoginModal from './LoginModal'
-import RegisterModal from './RegisterModal'
+import LoginModal from '../Components/LoginModal'
+import RegisterModal from '../Components/RegisterModal'
 
 const Homepage = ({ setIsAuthenticated, setUserRole }) => {
   const [showLogin, setShowLogin] = useState(false)

@@ -22,9 +22,16 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       }
 
       const data = await response.json()
-      console.log('Token ricevuto')
-      console.log(data.role);
+      console.log('Risposta completa',data);
       
+      console.log('Token ricevuto')
+      console.log(data.token)
+
+      console.log(data.role)
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('name', data.name)
+      localStorage.setItem('surname', data.surname)
+      localStorage.setItem('email', data.email)
 
       setIsAuthenticated(true)
       setUserRole(data.role)

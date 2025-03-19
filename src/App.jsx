@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Homepage from './Components/Homepage'
-import Dashboard from './Components/PsychologistDashboard'
+import Homepage from './Pages/Homepage'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserDashboard from './Components/UserDashboard'
-import PsychologistDashboard from './Components/PsychologistDashboard'
+import UserDashboard from './Pages/UserDashboard'
+import PsychologistDashboard from './Pages/PsychologistDashboard'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
