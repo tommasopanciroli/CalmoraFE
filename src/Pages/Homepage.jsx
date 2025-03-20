@@ -4,6 +4,7 @@ import MyNavbar from '../Components/MyNavbar'
 import '../Styles/Homepage.css'
 import LoginModal from '../Components/LoginModal'
 import RegisterModal from '../Components/RegisterModal'
+import HomepageCards from '../Components/HomepageCards'
 
 const Homepage = ({ setIsAuthenticated, setUserRole }) => {
   const [showLogin, setShowLogin] = useState(false)
@@ -31,6 +32,9 @@ const Homepage = ({ setIsAuthenticated, setUserRole }) => {
             </button>
           </Col>
         </Row>
+        <div id='cards'>
+        <HomepageCards/>
+        </div>
       </Container>
 
       <LoginModal
@@ -45,6 +49,8 @@ const Homepage = ({ setIsAuthenticated, setUserRole }) => {
         setIsAuthenticated={setIsAuthenticated}
         setUserRole={setUserRole}
       />
+
+     
     </>
   )
 }
