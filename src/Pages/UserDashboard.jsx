@@ -30,6 +30,8 @@ const UserDashboard = () => {
         return response.json()
       })
       .then((data) => {
+        console.log('Appuntamenti ricevuti', data)
+
         setAppointments(data)
         setLoading(false)
       })
@@ -75,10 +77,16 @@ const UserDashboard = () => {
                 {appointments.map((a) => (
                   <li key={a.id}>
                     <p>
-                      <strong>Data:</strong> {a.date}
+                      <strong>Data:</strong>{' '}
+                      {new Date(a.dataAppuntamento).toDateString('it-IT')}{' '}
+                      {new Date(a.dataAppuntamento).toLocaleTimeString('it-IT')}
                     </p>
                     <p>
-                      <strong>Descrizione:</strong> {a.description}
+                      <strong>Psicologo:</strong> {a.psicologo.name}{' '}
+                      {a.psicologo.surname}
+                    </p>
+                    <p>
+                      <strong>Sala virtuale: </strong> {a.psicologo.urlMeet}
                     </p>
                   </li>
                 ))}

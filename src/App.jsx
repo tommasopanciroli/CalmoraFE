@@ -18,17 +18,23 @@ function App() {
             element={
               isAuthenticated ? (
                 userRole === 'ROLE_USER' ? (
-                  <Navigate to="/dashboardUser" />
+                  <Navigate
+                    to={`/dashboardUser/${localStorage.getItem('userId')}`}
+                    replace
+                  />
                 ) : (
                   <Navigate to="/dashboardPsychologist" />
                 )
               ) : (
-                <Homepage setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole}/>
+                <Homepage
+                  setIsAuthenticated={setIsAuthenticated}
+                  setUserRole={setUserRole}
+                />
               )
             }
           />
           <Route
-            path="/dashboardUser"
+            path="/dashboardUser/:id?"
             element={isAuthenticated ? <UserDashboard /> : <Navigate to="/" />}
           />
           <Route

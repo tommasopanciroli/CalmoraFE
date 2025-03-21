@@ -22,8 +22,8 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       }
 
       const data = await response.json()
-      console.log('Risposta completa',data);
-      
+      console.log('Risposta completa', data)
+
       console.log('Token ricevuto')
       console.log(data.token)
 
@@ -32,13 +32,13 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       localStorage.setItem('name', data.name)
       localStorage.setItem('surname', data.surname)
       localStorage.setItem('email', data.email)
-
+      localStorage.setItem('userId', data.id)
       setIsAuthenticated(true)
       setUserRole(data.role)
 
       handleClose()
       if (data.role === 'ROLE_USER') {
-        navigate('/dashboardUser')
+        navigate(`/dashboardUser/${data.id}`)
       } else if (data.role === 'ROLE_PSYCHOLOGIST') {
         navigate('/dashboardPsychologist')
       }
