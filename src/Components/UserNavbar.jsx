@@ -12,8 +12,8 @@ const UserNavbar = () => {
         </Navbar.Brand>
         <Navbar.Brand as={Link}>Calmora</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link>Psicologi</Nav.Link>
-          <NavLink as={Link} to={'/dashboardUser'}>
+          <Nav.Link as={Link} to={'/psicologi'}>Psicologi</Nav.Link>
+          <NavLink as={Link} to={`/dashboardUser/${localStorage.getItem('userId')}`}>
             Il mio profilo
           </NavLink>
         </Nav>

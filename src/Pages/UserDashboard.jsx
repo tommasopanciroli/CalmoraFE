@@ -3,6 +3,7 @@ import { Container, Button } from 'react-bootstrap'
 import profilePic from '../Images/profile.jpeg'
 import '../Styles/UserDashboard.css'
 import UserNavbar from '../Components/UserNavbar'
+import { Link } from 'react-router-dom'
 
 const UserDashboard = () => {
   const [appointments, setAppointments] = useState([])
@@ -92,7 +93,9 @@ const UserDashboard = () => {
                 ))}
               </ul>
             )}
-            <button id="prenota">Prenota un appuntamento</button>
+            <Link to={'/psicologi'}>
+              <button id="prenota">Prenota un appuntamento</button>
+            </Link>
           </div>
         </div>
       </Container>

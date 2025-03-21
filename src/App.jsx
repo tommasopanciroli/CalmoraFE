@@ -4,6 +4,7 @@ import Homepage from './Pages/Homepage'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UserDashboard from './Pages/UserDashboard'
 import PsychologistDashboard from './Pages/PsychologistDashboard'
+import Psychologists from './Pages/Psychologists'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -41,6 +42,12 @@ function App() {
             path="/dashboardPsychologist"
             element={
               isAuthenticated ? <PsychologistDashboard /> : <Navigate to="/" />
+            }
+          />
+          <Route
+            path="/psicologi"
+            element={
+              isAuthenticated ? <Psychologists /> : <Navigate to={'/'} />
             }
           />
         </Routes>
