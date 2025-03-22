@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button, Form, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -18,7 +19,7 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       })
 
       if (!response.ok) {
-        throw new Error('Errore nle login')
+        throw new Error('Errore nel login')
       }
 
       const data = await response.json()
@@ -26,7 +27,6 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
 
       console.log('Token ricevuto')
       console.log(data.token)
-
       console.log(data.role)
       localStorage.setItem('token', data.token)
       localStorage.setItem('name', data.name)
@@ -34,6 +34,7 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       localStorage.setItem('email', data.email)
       localStorage.setItem('userId', data.id)
       setIsAuthenticated(true)
+      setErrorMessage('')
       setUserRole(data.role)
 
       handleClose()
@@ -44,6 +45,7 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       }
     } catch (error) {
       console.error('Errore durante il login: ', error.message)
+      setErrorMessage('Email o password errati')
     }
   }
 
@@ -74,6 +76,11 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
               required
             />
           </Form.Group>
+          {errorMessage && (
+            <Alert variant="danger" className="mt-3">
+              {errorMessage}
+            </Alert>
+          )}
           <Button variant="primary" type="submit">
             Accedi
           </Button>
