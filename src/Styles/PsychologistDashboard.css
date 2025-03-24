@@ -1,0 +1,33 @@
+.dashboard-body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+#profileimg {
+  border-radius: 10px;
+  border: 1px solid #44afcf;
+}
+
+#appuntamenti {
+  border: 1px solid #44afcf;
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 320px;
+}
+
+.profile-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#userInfo {
+  border: 1px solid #44afcf;
+  border-radius: 8px;
+  width: 300px;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}

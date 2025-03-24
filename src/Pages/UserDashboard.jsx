@@ -26,7 +26,7 @@ const UserDashboard = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Errore nella risposta del server')
+          throw new Error('Errore nella recupero degli appuntamenti')
         }
         return response.json()
       })
@@ -46,7 +46,7 @@ const UserDashboard = () => {
     <>
       <UserNavbar />
       <Container>
-        <div className="dashboard-header text-center mt-5">
+        <div className="text-center mt-5">
           <h2>
             Benvenuto nella tua Dashboard
             {firstName && lastName ? `, ${firstName} ${lastName}` : ''}
