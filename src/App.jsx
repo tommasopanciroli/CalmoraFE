@@ -24,7 +24,12 @@ function App() {
                     replace
                   />
                 ) : (
-                  <Navigate to="/dashboardPsychologist" />
+                  <Navigate
+                    to={`/dashboardPsychologist/${localStorage.getItem(
+                      'userId'
+                    )}`}
+                    replace
+                  />
                 )
               ) : (
                 <Homepage
@@ -36,12 +41,28 @@ function App() {
           />
           <Route
             path="/dashboardUser/:id?"
-            element={isAuthenticated ? <UserDashboard /> : <Navigate to="/" />}
+            element={
+              isAuthenticated ? (
+                <UserDashboard
+                  setIsAuthenticated={setIsAuthenticated}
+                  setUserRole={setUserRole}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
-            path="/dashboardPsychologist"
+            path="/dashboardPsychologist/:id?"
             element={
-              isAuthenticated ? <PsychologistDashboard /> : <Navigate to="/" />
+              isAuthenticated ? (
+                <PsychologistDashboard
+                  setIsAuthenticated={setIsAuthenticated}
+                  setUserRole={setUserRole}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
           <Route

@@ -5,7 +5,7 @@ import '../Styles/UserDashboard.css'
 import UserNavbar from '../Components/UserNavbar'
 import { Link } from 'react-router-dom'
 
-const UserDashboard = () => {
+const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -42,9 +42,40 @@ const UserDashboard = () => {
       })
   }, [])
 
+  const handleDelete = (appointmentId) => {
+    const token = localStorage.getItem('token')
+    if (!window.confirm("Sei sicuro di voler cancellare l'appuntamento?"))
+      return
+
+    fetch(`http://localhost:8080/api/appointments/${appointmentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore nella cancellazione dell'appuntamento")
+        }
+        return response.text()
+      })
+      .then(() => {
+        setAppointments((prev) =>
+          prev.filter((app) => app.id !== appointmentId)
+        )
+      })
+      .catch((error) => {
+        console.error("Errore nella cancellazione dell'appuntamento:", error)
+      })
+  }
+
   return (
     <>
-      <UserNavbar />
+      <UserNavbar
+        setIsAuthenticated={setIsAuthenticated}
+        setUserRole={setUserRole}
+      />
       <Container>
         <div className="text-center mt-5">
           <h2>
@@ -89,6 +120,9 @@ const UserDashboard = () => {
                     <p>
                       <strong>Sala virtuale: </strong> {a.psicologo.urlMeet}
                     </p>
+                    <button id="delete" onClick={() => handleDelete(a.id)}>
+                      Elimina appuntamento
+                    </button>
                   </li>
                 ))}
               </ul>

@@ -1,9 +1,9 @@
 import { Container } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { Nav, NavLink, Navbar } from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 import '../Styles/UserNavbar.css'
 
-const UserNavbar = ({ setIsAuthenticated, setUserRole }) => {
+const PsychologistNavbar = ({ setIsAuthenticated, setUserRole }) => {
   const navigate = useNavigate()
   const handleLogut = () => {
     localStorage.clear()
@@ -18,22 +18,13 @@ const UserNavbar = ({ setIsAuthenticated, setUserRole }) => {
         <Navbar.Brand>
           <img src="/logoCalmora.png" style={{ width: '60px' }}></img>
         </Navbar.Brand>
-        <Navbar.Brand as={Link}>Calmora</Navbar.Brand>
+        <Navbar.Brand>Calmora</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link as={Link} to={'/psicologi'}>
-            Psicologi
-          </Nav.Link>
-          <NavLink
-            as={Link}
-            to={`/dashboardUser/${localStorage.getItem('userId')}`}
-          >
-            Il mio profilo
-          </NavLink>
-          <NavLink onClick={handleLogut}>Logout</NavLink>
+          <Nav.Link onClick={handleLogut}>Logout</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
   )
 }
 
-export default UserNavbar
+export default PsychologistNavbar

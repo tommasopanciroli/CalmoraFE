@@ -1,9 +1,11 @@
 import React from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import profilePic from '../Images/colloquio.jpg'
+import '../Styles/PsychologistDashboard.css'
+import PsychologistNavbar from '../Components/PsychologistNavbar'
 
-const PsychologistDashboard = () => {
+const PsychologistDashboard = ({ setIsAuthenticated, setUserRole }) => {
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -40,8 +42,40 @@ const PsychologistDashboard = () => {
       })
   }, [])
 
+  const handleDelete = (appointmentId) => {
+    const token = localStorage.getItem('token')
+    if (!window.confirm('Sei sicuro di voler eliminare questo appuntamento?'))
+      return
+
+    fetch(`http://localhost:8080/api/appointments/${appointmentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore nella cancellazione dell'appuntamento")
+        }
+        return response.text()
+      })
+      .then(() => {
+        setAppointments((prev) =>
+          prev.filter((app) => app.id !== appointmentId)
+        )
+      })
+      .catch((error) => {
+        console.error("Errore durante l'eliminazione: ", error.message)
+      })
+  }
+
   return (
     <>
+      <PsychologistNavbar
+        setIsAuthenticated={setIsAuthenticated}
+        setUserRole={setUserRole}
+      />
       <Container className="text-center mt-5">
         <div>
           <h2>
@@ -53,7 +87,12 @@ const PsychologistDashboard = () => {
 
         <div className="dashboard-body">
           <div className="profile-column">
-            <img style={{ width: '300px' }} id="profileimg" src={profilePic} alt="profilePic" />
+            <img
+              style={{ width: '300px' }}
+              id="profileimg"
+              src={profilePic}
+              alt="profilePic"
+            />
             <div id="userInfo">
               <h3>I tuoi dati</h3>
               <p>Email: {email}</p>
@@ -85,6 +124,9 @@ const PsychologistDashboard = () => {
                     <p>
                       <strong>Sala virtuale: </strong> {a.psicologo.urlMeet}
                     </p>
+                    <button id="delete" onClick={() => handleDelete(a.id)}>
+                      Elimina appuntamento
+                    </button>
                   </li>
                 ))}
               </ul>
