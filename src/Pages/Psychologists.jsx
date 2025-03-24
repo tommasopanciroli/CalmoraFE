@@ -14,7 +14,7 @@ import UserNavbar from '../Components/UserNavbar'
 import '../Styles/Psychologists.css'
 import Colloquio from '../Images/colloquio.jpg'
 
-const Psychologists = () => {
+const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
   const [psychologists, setPsychologists] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -109,7 +109,7 @@ const Psychologists = () => {
 
   return (
     <>
-      <UserNavbar />
+      <UserNavbar setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole}/>
       <Container className="mt-4">
         <Row>
           {psychologists.map((psycho) => (

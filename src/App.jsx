@@ -68,7 +68,14 @@ function App() {
           <Route
             path="/psicologi"
             element={
-              isAuthenticated ? <Psychologists /> : <Navigate to={'/'} />
+              isAuthenticated ? (
+                <Psychologists
+                  setIsAuthenticated={setIsAuthenticated}
+                  setUserRole={setUserRole}
+                />
+              ) : (
+                <Navigate to={'/'} />
+              )
             }
           />
         </Routes>
