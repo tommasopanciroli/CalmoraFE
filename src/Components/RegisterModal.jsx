@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import '../Styles/RegisterModal.css'
 
 const RegisterModal = ({
   show,
@@ -76,7 +77,7 @@ const RegisterModal = ({
   }
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal contentClassName='register-modal-content' show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>Registrati</Modal.Title>
       </Modal.Header>
@@ -142,9 +143,7 @@ const RegisterModal = ({
             </Form.Group>
           )}
 
-          <Button variant="success" type="submit">
-            Registrati
-          </Button>
+          <button id='register-button'>Registrati</button>
         </Form>
       </Modal.Body>
     </Modal>
