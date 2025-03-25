@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import '../Styles/LoginModal.css'
 
 const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
   const [email, setEmail] = useState('')
@@ -50,7 +51,12 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
   }
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal
+      contentClassName="login-modal-content"
+      show={show}
+      onHide={handleClose}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Accedi</Modal.Title>
       </Modal.Header>
@@ -81,9 +87,7 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
               {errorMessage}
             </Alert>
           )}
-          <Button variant="primary" type="submit">
-            Accedi
-          </Button>
+          <button id='login-button'>Accedi</button>
         </Form>
       </Modal.Body>
     </Modal>

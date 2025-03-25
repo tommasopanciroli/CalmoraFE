@@ -1,0 +1,26 @@
+.login-modal-content {
+  background-color: #44afcf;
+  color: white;
+}
+
+#login-button {
+  background-color: #44afcf;
+  border-radius: 6px;
+  border: 1px solid white;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 7px 38px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 1rem;
+}
+
+#login-button:hover {
+  background-color: white;
+  color: #44afcf;
+  border:solid 1px #44afcf;
+}
