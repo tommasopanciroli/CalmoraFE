@@ -167,7 +167,7 @@ const SearchBar = ({ style }) => {
         </Row>
       </Container>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+      <Modal contentClassName="booking-modal" show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Prenota un Appuntamento</Modal.Title>
         </Modal.Header>
@@ -203,17 +203,13 @@ const SearchBar = ({ style }) => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  Prenota
-                </Button>
+                <button id='book-button' type="submit">Prenota</button>
               </Form>
             </>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Chiudi
-          </Button>
+         <button id='close-button' onClick={() => setShowModal(false)}>Chiudi</button>
         </Modal.Footer>
       </Modal>
     </>
