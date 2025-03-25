@@ -12,6 +12,7 @@ import {
   Modal,
 } from 'react-bootstrap'
 import Colloquio from '../Images/colloquio.jpg'
+import '../Styles/SearchBar.css'
 
 const SearchBar = ({ style }) => {
   const [query, setQuery] = useState('')
@@ -118,9 +119,7 @@ const SearchBar = ({ style }) => {
                 onChange={(e) => setQuery(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Cerca
-            </Button>
+            <button id='search-button'>Cerca</button>
           </InputGroup>
         </Form>
       </Container>

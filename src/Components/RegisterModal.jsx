@@ -58,9 +58,14 @@ const RegisterModal = ({
         throw new Error('Errore nella registrazione: ' + errorText)
       }
 
-      const data = await response.text()
+      const data = await response.json()
       console.log('Utente registrato:', data)
 
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('name', data.name)
+      localStorage.setItem('surname', data.surname)
+      localStorage.setItem('email', data.email)
+      localStorage.setItem('userId', data.id)
       setIsAuthenticated(true)
       setUserRole(role)
 
@@ -77,7 +82,12 @@ const RegisterModal = ({
   }
 
   return (
-    <Modal contentClassName='register-modal-content' show={show} onHide={handleClose} centered>
+    <Modal
+      contentClassName="register-modal-content"
+      show={show}
+      onHide={handleClose}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Registrati</Modal.Title>
       </Modal.Header>
@@ -143,7 +153,7 @@ const RegisterModal = ({
             </Form.Group>
           )}
 
-          <button id='register-button'>Registrati</button>
+          <button id="register-button">Registrati</button>
         </Form>
       </Modal.Body>
     </Modal>
