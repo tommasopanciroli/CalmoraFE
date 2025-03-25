@@ -1,54 +1,66 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Container,
+  Form,
+  Button,
   Row,
   Col,
   Card,
   Spinner,
   Alert,
+  InputGroup,
   Modal,
-  Button,
-  Form,
 } from 'react-bootstrap'
-import UserNavbar from '../Components/UserNavbar'
-import '../Styles/Psychologists.css'
 import Colloquio from '../Images/colloquio.jpg'
-import SearchBar from '../Components/SearchBar'
 
-const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
-  const [psychologists, setPsychologists] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+const SearchBar = ({ style }) => {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const [showModal, setShowModal] = useState(false)
   const [selectedPsychologist, setSelectedPsychologist] = useState(null)
-
   const [appointmentDate, setAppointmentDate] = useState('')
   const [appointmentTime, setAppointmentTime] = useState('')
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    fetch('http://localhost:8080/api/psychologists', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
+  const token = localStorage.getItem('token')
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+
+    if (!query.trim()) return
+
+    setLoading(true)
+    setError('')
+
+    fetch(
+      `http://localhost:8080/api/auth/search?keyword=${encodeURIComponent(
+        query
+      )}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Errore nel caricamento degli psicologi')
+          throw new Error('Errore nella ricerca')
         }
         return response.json()
       })
       .then((data) => {
-        setPsychologists(data)
+        setResults(data)
         setLoading(false)
       })
-      .catch((error) => {
-        setError(error.message)
+      .catch((err) => {
+        console.error('Errore nella ricerca:', err.message)
+        setError(err.message)
         setLoading(false)
       })
-  }, [])
+  }
 
   const handleCardClick = (psycho) => {
     setSelectedPsychologist(psycho)
@@ -57,11 +69,7 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
 
   const handleBookAppointment = (e) => {
     e.preventDefault()
-
-    const token = localStorage.getItem('token')
-
     const appointDateTime = `${appointmentDate}T${appointmentTime}:00`
-
     fetch(
       `http://localhost:8080/api/appointments?psychologistId=${
         selectedPsychologist.id
@@ -72,7 +80,7 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(),
+        body: JSON.stringify({}),
       }
     )
       .then((response) => {
@@ -94,48 +102,69 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
       })
   }
 
-  if (loading) {
-    return (
-      <Spinner animation="border" className="d-block mx-auto mt-5">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    )
-  }
-  if (error)
-    return (
-      <Alert variant="danger" className="mt-4">
-        {error}
-      </Alert>
-    )
-
   return (
     <>
-      <UserNavbar
-        setIsAuthenticated={setIsAuthenticated}
-        setUserRole={setUserRole}
-      />
-      <SearchBar style={{ marginTop: '20px', width: '100%' }} />
-      <Container className="mt-4">
-        <Row>
-          {psychologists.map((psycho) => (
-            <Col
-              key={psycho.id}
-              md={4}
-              className="d-flex align-items-stretch mb-4"
-            >
-              <Card
-                className="w-100 text-center"
-                onClick={() => handleCardClick(psycho)}
-              >
-                <Card.Img src={Colloquio} className="card-img-top" />
-                <Card.Body>
-                  <Card.Title>
-                    {psycho.name} {psycho.surname}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+      <Container
+        className="d-flex justify-content-center"
+        style={{ maxWidth: '500px', ...style }}
+      >
+        <Form onSubmit={handleSearch}>
+          <InputGroup>
+            <Form.Group controlId="searchQuery">
+              <Form.Control
+                type="text"
+                placeholder="Cerca uno psicologo..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Cerca
+            </Button>
+          </InputGroup>
+        </Form>
+      </Container>
+      <Container>
+        {loading && (
+          <div className="mt-3 text-center">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Caricamento...</span>
+            </Spinner>
+          </div>
+        )}
+
+        {error && (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        )}
+
+        <Row className="mt-4">
+          {results.length > 0
+            ? results.map((psycho) => (
+                <Col
+                  key={psycho.id}
+                  md={4}
+                  className="d-flex align-items-stretch mb-4"
+                >
+                  <Card
+                    className="w-100 text-center"
+                    onClick={() => handleCardClick(psycho)}
+                  >
+                    <Card.Img
+                      src={Colloquio}
+                      className="card-img-top"
+                      alt="Immagine Psicologo"
+                    />
+                    <Card.Body>
+                      <Card.Title>
+                        {psycho.name} {psycho.surname}
+                      </Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            : !loading && query && <p>Nessun risultato trovato.</p>}
         </Row>
       </Container>
 
@@ -192,4 +221,4 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
   )
 }
 
-export default Psychologists
+export default SearchBar
