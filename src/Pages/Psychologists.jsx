@@ -139,7 +139,12 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
         </Row>
       </Container>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+      <Modal
+        contentClassName="booking-modal"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Prenota un Appuntamento</Modal.Title>
         </Modal.Header>
@@ -175,17 +180,15 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <button id="book-button" type="submit">
                   Prenota
-                </Button>
+                </button>
               </Form>
             </>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Chiudi
-          </Button>
+          <button id='close-button' onClick={() => setShowModal(false)}>Chiudi</button>
         </Modal.Footer>
       </Modal>
     </>

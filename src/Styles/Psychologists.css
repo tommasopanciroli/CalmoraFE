@@ -6,3 +6,54 @@
 #prenota {
   margin-top: 1rem;
 }
+
+.booking-modal {
+  background-color: #44afcf;
+  color: white;
+}
+
+#book-button {
+  background-color: #44afcf;
+  border-radius: 6px;
+  border: 1px solid white;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font-family: Arial;
+  font-size: 17px;
+  padding: auto;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: 39px;
+  width: 100px;
+}
+
+#book-button:hover {
+  background-color: white;
+  color: #44afcf;
+  border: solid 1px #44afcf;
+}
+
+#close-button {
+  background-color: gray;
+  border-radius: 6px;
+  border: 1px solid white;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font-family: Arial;
+  font-size: 17px;
+  padding: auto;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: 39px;
+  width: 100px;
+}
+
+#close-button:hover {
+  background-color: white;
+  color: gray;
+  border: solid 1px gray;
+}
