@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import UserDashboard from './Pages/UserDashboard'
 import PsychologistDashboard from './Pages/PsychologistDashboard'
 import Psychologists from './Pages/Psychologists'
+import MyFooter from './Components/MyFooter'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -80,6 +81,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      
     </>
   )
 }

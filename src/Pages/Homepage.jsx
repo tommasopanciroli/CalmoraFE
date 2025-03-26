@@ -5,6 +5,7 @@ import '../Styles/Homepage.css'
 import LoginModal from '../Components/LoginModal'
 import RegisterModal from '../Components/RegisterModal'
 import HomepageCards from '../Components/HomepageCards'
+import MyFooter from '../Components/MyFooter'
 
 const Homepage = ({ setIsAuthenticated, setUserRole }) => {
   const [showLogin, setShowLogin] = useState(false)
@@ -32,10 +33,11 @@ const Homepage = ({ setIsAuthenticated, setUserRole }) => {
             </button>
           </Col>
         </Row>
-        <div id='cards'>
-        <HomepageCards/>
+        <div id="cards">
+          <HomepageCards />
         </div>
       </Container>
+      <MyFooter />
 
       <LoginModal
         show={showLogin}
@@ -49,8 +51,6 @@ const Homepage = ({ setIsAuthenticated, setUserRole }) => {
         setIsAuthenticated={setIsAuthenticated}
         setUserRole={setUserRole}
       />
-
-     
     </>
   )
 }

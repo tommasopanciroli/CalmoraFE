@@ -4,6 +4,8 @@ import profilePic from '../Images/profile.jpeg'
 import '../Styles/UserDashboard.css'
 import UserNavbar from '../Components/UserNavbar'
 import { Link } from 'react-router-dom'
+import MyFooter from '../Components/MyFooter'
+import '../Styles/MyFooter.css'
 
 const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
   const [appointments, setAppointments] = useState([])
@@ -72,67 +74,72 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
 
   return (
     <>
-      <UserNavbar
-        setIsAuthenticated={setIsAuthenticated}
-        setUserRole={setUserRole}
-      />
-      <Container>
-        <div className="text-center mt-5">
-          <h2>
-            Benvenuto nella tua Dashboard
-            {firstName && lastName ? `, ${firstName} ${lastName}` : ''}
-          </h2>
-          <p>Qui vedrai la tua area personale.</p>
-        </div>
+      <div className='layout-wrapper'>
+        <UserNavbar
+          setIsAuthenticated={setIsAuthenticated}
+          setUserRole={setUserRole}
+        />
+        <Container className='page-content'>
+          <div className="text-center mt-5">
+            <h2>
+              Benvenuto nella tua Dashboard
+              {firstName && lastName ? `, ${firstName} ${lastName}` : ''}
+            </h2>
+            <p>Qui vedrai la tua area personale.</p>
+          </div>
 
-        <div className="dashboard-body">
-          <div className="profile-column">
-            <img id="profileimg" src={profilePic} alt="profilePic" />
-            <div id="userInfo">
-              <h3>I tuoi dati</h3>
-              <p>Email: {email}</p>
-              <p>Nome: {firstName}</p>
-              <p>Cognome: {lastName}</p>
+          <div className="dashboard-body">
+            <div className="profile-column">
+              <img id="profileimg" src={profilePic} alt="profilePic" />
+              <div id="userInfo">
+                <h3>I tuoi dati</h3>
+                <p>Email: {email}</p>
+                <p>Nome: {firstName}</p>
+                <p>Cognome: {lastName}</p>
+              </div>
+            </div>
+
+            <div id="appuntamenti">
+              <h2>I tuoi appuntamenti</h2>
+              {loading ? (
+                <p>Caricamento...</p>
+              ) : error ? (
+                <p>Errore nel caricamento degli appuntamenti.</p>
+              ) : appointments.length === 0 ? (
+                <p>Nessun appuntamento prenotato.</p>
+              ) : (
+                <ul>
+                  {appointments.map((a) => (
+                    <li key={a.id}>
+                      <p>
+                        <strong>Data:</strong>{' '}
+                        {new Date(a.dataAppuntamento).toDateString('it-IT')}{' '}
+                        {new Date(a.dataAppuntamento).toLocaleTimeString(
+                          'it-IT'
+                        )}
+                      </p>
+                      <p>
+                        <strong>Psicologo:</strong> {a.psicologo.name}{' '}
+                        {a.psicologo.surname}
+                      </p>
+                      <p>
+                        <strong>Sala virtuale: </strong> {a.psicologo.urlMeet}
+                      </p>
+                      <button id="delete" onClick={() => handleDelete(a.id)}>
+                        Elimina appuntamento
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <Link to={'/psicologi'}>
+                <button id="prenota">Prenota un appuntamento</button>
+              </Link>
             </div>
           </div>
-
-          <div id="appuntamenti">
-            <h2>I tuoi appuntamenti</h2>
-            {loading ? (
-              <p>Caricamento...</p>
-            ) : error ? (
-              <p>Errore nel caricamento degli appuntamenti.</p>
-            ) : appointments.length === 0 ? (
-              <p>Nessun appuntamento prenotato.</p>
-            ) : (
-              <ul>
-                {appointments.map((a) => (
-                  <li key={a.id}>
-                    <p>
-                      <strong>Data:</strong>{' '}
-                      {new Date(a.dataAppuntamento).toDateString('it-IT')}{' '}
-                      {new Date(a.dataAppuntamento).toLocaleTimeString('it-IT')}
-                    </p>
-                    <p>
-                      <strong>Psicologo:</strong> {a.psicologo.name}{' '}
-                      {a.psicologo.surname}
-                    </p>
-                    <p>
-                      <strong>Sala virtuale: </strong> {a.psicologo.urlMeet}
-                    </p>
-                    <button id="delete" onClick={() => handleDelete(a.id)}>
-                      Elimina appuntamento
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <Link to={'/psicologi'}>
-              <button id="prenota">Prenota un appuntamento</button>
-            </Link>
-          </div>
-        </div>
-      </Container>
+        </Container>
+        <MyFooter />
+      </div>
     </>
   )
 }

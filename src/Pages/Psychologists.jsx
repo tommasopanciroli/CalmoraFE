@@ -14,6 +14,7 @@ import UserNavbar from '../Components/UserNavbar'
 import '../Styles/Psychologists.css'
 import Colloquio from '../Images/colloquio.jpg'
 import SearchBar from '../Components/SearchBar'
+import MyFooter from '../Components/MyFooter'
 
 const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
   const [psychologists, setPsychologists] = useState([])
@@ -138,6 +139,7 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
           ))}
         </Row>
       </Container>
+      <MyFooter />
 
       <Modal
         contentClassName="booking-modal"
