@@ -1,6 +1,6 @@
 .register-modal-content {
   background-color: #44afcf !important;
-  color: white;
+  color: white !important;
 }
 
 .form-control:focus {

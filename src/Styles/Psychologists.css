@@ -8,8 +8,8 @@
 }
 
 .booking-modal {
-  background-color: #44afcf;
-  color: white;
+  background-color: #44afcf !important;
+  color: white !important;
 }
 
 #book-button {

@@ -29,7 +29,11 @@ const UserNavbar = ({ setIsAuthenticated, setUserRole }) => {
           >
             Il mio profilo
           </NavLink>
-          <NavLink onClick={handleLogut}>Logout</NavLink>
+        </Nav>
+        <Nav className='ms-auto'>
+          <NavLink onClick={handleLogut}>
+            Logout
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>
