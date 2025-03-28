@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Container, Button } from 'react-bootstrap'
-import profilePic from '../Images/profile.jpeg'
 import '../Styles/UserDashboard.css'
 import UserNavbar from '../Components/UserNavbar'
 import { Link } from 'react-router-dom'
