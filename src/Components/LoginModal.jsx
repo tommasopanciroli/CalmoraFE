@@ -34,6 +34,19 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
       localStorage.setItem('surname', data.surname)
       localStorage.setItem('email', data.email)
       localStorage.setItem('userId', data.id)
+
+      const res = await fetch(`http://localhost:8080/api/auth/${data.id}`, {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      })
+
+      const userData = await res.json()
+      console.log('Dati utente recuperati:', userData)
+      if (userData.profileImageUrl) {
+        localStorage.setItem('profileImageUrl', userData.profileImageUrl)
+      }
+
       setIsAuthenticated(true)
       setErrorMessage('')
       setUserRole(data.role)
@@ -87,7 +100,7 @@ const LoginModal = ({ show, handleClose, setIsAuthenticated, setUserRole }) => {
               {errorMessage}
             </Alert>
           )}
-          <button id='login-button'>Accedi</button>
+          <button id="login-button">Accedi</button>
         </Form>
       </Modal.Body>
     </Modal>
