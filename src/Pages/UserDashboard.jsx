@@ -17,7 +17,6 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
   const userId = localStorage.getItem('userId')
   const token = localStorage.getItem('token')
 
-  // eslint-disable-next-line no-unused-vars
   const [profileImageUrl, setProfileImageUrl] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [selectedFile, setSelectedFile] = useState(null)
@@ -147,9 +146,14 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
 
           <div className="dashboard-body">
             <div className="profile-column">
-              <img id="profileimg" style={{ width: '300px' }} src={profileImageUrl || 'Images/avatar.png'} alt="profilePic" />
+              <img
+                id="profileimg"
+                style={{ width: '300px' }}
+                src={profileImageUrl || 'Images/avatar.png'}
+                alt="profilePic"
+              />
               <div id="userInfo">
-                <h3>I tuoi dati</h3>
+                <h3 className="align-self-center">I tuoi dati</h3>
                 <p>Email: {email}</p>
                 <p>Nome: {firstName}</p>
                 <p>Cognome: {lastName}</p>
@@ -165,6 +169,7 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
               <button
                 className="mt-2"
                 onClick={() => fileInputRef.current.click()}
+                id="profileImageButton"
               >
                 Modifica immagine profilo
               </button>
@@ -177,7 +182,7 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
               ) : error ? (
                 <p>Errore nel caricamento degli appuntamenti.</p>
               ) : appointments.length === 0 ? (
-                <p>Nessun appuntamento prenotato.</p>
+                <p id='noApp'>Nessun appuntamento prenotato.</p>
               ) : (
                 <ul>
                   {appointments.map((a) => (
@@ -203,9 +208,11 @@ const UserDashboard = ({ setIsAuthenticated, setUserRole }) => {
                   ))}
                 </ul>
               )}
-              <Link to={'/psicologi'}>
-                <button id="prenota">Prenota un appuntamento</button>
-              </Link>
+              <div className='prenota-wrapper'>
+                <Link to={'/psicologi'}>
+                  <button id="prenota">Prenota un appuntamento</button>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>

@@ -75,7 +75,7 @@ const PsychologistDashboard = ({ setIsAuthenticated, setUserRole }) => {
       }
     )
     const data = await response.json()
-    console.log("Risposta Cloudinary:", data);
+    console.log('Risposta Cloudinary:', data)
     return data.secure_url
   }
 
@@ -83,23 +83,22 @@ const PsychologistDashboard = ({ setIsAuthenticated, setUserRole }) => {
     const file = e.target.files[0]
     if (!file) return
     setSelectedFile(file)
-  
+
     const url = await uploadImageToCloudinary(file)
-  
+
     await fetch(`http://localhost:8080/api/auth/${userId}/profile-image`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ profileImageUrl: url })
+      body: JSON.stringify({ profileImageUrl: url }),
     })
-  
+
     setProfileImageUrl(url)
     localStorage.setItem('profileImageUrl', url)
     setSelectedFile(null)
-    console.log(url);
-    
+    console.log(url)
   }
 
   const handleDelete = (appointmentId) => {
@@ -147,17 +146,19 @@ const PsychologistDashboard = ({ setIsAuthenticated, setUserRole }) => {
 
           <div className="dashboard-body">
             <div className="profile-column">
-              <img
-                style={{ width: '300px' }}
-                id="profileimg"
-                src={profileImageUrl || '/Images/avatar.png'}
-                alt="profilePic"
-              />
-              <div id="userInfo">
-                <h3>I tuoi dati</h3>
-                <p>Email: {email}</p>
-                <p>Nome: {firstName}</p>
-                <p>Cognome: {lastName}</p>
+              <div id='profile-info-wrapper'>
+                <img
+                  style={{ width: '300px' }}
+                  id="profileimg"
+                  src={profileImageUrl || '/Images/avatar.png'}
+                  alt="profilePic"
+                />
+                <div id="userInfo">
+                  <h3 className='align-self-center'>I tuoi dati</h3>
+                  <p>Email: {email}</p>
+                  <p>Nome: {firstName}</p>
+                  <p>Cognome: {lastName}</p>
+                </div>
               </div>
               <input
                 type="file"
@@ -169,6 +170,7 @@ const PsychologistDashboard = ({ setIsAuthenticated, setUserRole }) => {
 
               <button
                 className="mt-2"
+                id="profileImageButton"
                 onClick={() => fileInputRef.current.click()}
               >
                 Modifica immagine profilo

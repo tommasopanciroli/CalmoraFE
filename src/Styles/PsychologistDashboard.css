@@ -28,6 +28,27 @@
   border: 1px solid #44afcf;
   border-radius: 8px;
   width: 300px;
-  margin-top: 0.5rem;
-  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+#profileImageButton {
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #44afcf;
+  cursor: pointer;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  padding: 7px 38px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 1.5rem;
+  align-self: flex-start;
+  width: 300px;
+}
+
+#profileImageButton:hover {
+  background-color: #44afcf;
+  color: #ffffff;
 }

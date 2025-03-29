@@ -125,10 +125,14 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
               className="d-flex align-items-stretch mb-4"
             >
               <Card
-                className="w-100 text-center"
+                className="text-center"
+                style={{ width: '300px' }}
                 onClick={() => handleCardClick(psycho)}
               >
-                <Card.Img src={Colloquio} className="card-img-top" />
+                <Card.Img
+                  src={psycho.profileImageUrl}
+                  className="card-img-top"
+                />
                 <Card.Body>
                   <Card.Title>
                     {psycho.name} {psycho.surname}
@@ -190,7 +194,9 @@ const Psychologists = ({ setIsAuthenticated, setUserRole }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <button id='close-button' onClick={() => setShowModal(false)}>Chiudi</button>
+          <button id="close-button" onClick={() => setShowModal(false)}>
+            Chiudi
+          </button>
         </Modal.Footer>
       </Modal>
     </>

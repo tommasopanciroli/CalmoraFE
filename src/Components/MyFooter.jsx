@@ -14,7 +14,7 @@ const MyFooter = () => {
           </Col>
         </Row>
         <Row className="text-center">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} lg={4}>
             <ul className="list-unstyled d-inline-flex gap-3">
               <li>
                 <a
@@ -31,7 +31,10 @@ const MyFooter = () => {
               </li>
             </ul>
           </Col>
-          <Col xs={12} md={6} className="mt-3 mt-md-0">
+          <Col xs={12} md={6} lg={4}>
+            <img style={{ width: '60px' }} src="./logoCalmora.png" alt="" />
+          </Col>
+          <Col xs={12} md={6} lg={4} className="mt-3 mt-md-0">
             <ul className="list-unstyled d-inline-flex gap-3">
               <li>
                 <a href="#" className="text-light text-decoration-none">
